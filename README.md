@@ -5,7 +5,7 @@ StenoTutor - Learn to stenotype
 
 With StenoTutor you can learn to stenotype on your QWERTY keyboard, also thanks to [Plover](https://github.com/plover/plover), an open source application which transforms your QWERTY keyboard in a stenograph, while still mantaining full control over your operating system.
 
-StenoTutor is a free software available for GNU/Linux, Windows and Mac (not tested on Mac, please let me know if it works), and requires a recent Java runtime installed and Plover 2.4.x installed and running. It is coded in Processing IDE 2.x.
+StenoTutor is a free software available for GNU/Linux, Windows and Mac (not tested on Mac, please let me know if it works), and requires a recent Java runtime installed and Plover 2.4.x installed and running. It is coded in Processing IDE 3.x.
 
 StenoTutor tries to be a smart trainer: words that takes you longer to type have more possibilites of showing up, so you will spend most of your time working on your weaknesses. It also allows to blacklist some words, in case you don't have a NKRO keyboard yet and you just want to see if you enjoy steno and how well you speed up, without being annoyed by words that your keyboard cannot actually type without rolling or arpeggiating chords.
 
@@ -22,16 +22,16 @@ Installation
 * Optionally tweak data/session.properties to customize the lesson.
 * Run Plover (it must be version 2.4+). It must be running and enabled to properly capture its translated output.
 
-1. Linux - 
+1. Linux -
 Make "StenoTutor" script executable, either on command line (chmod +x StenoTutor) or by right-clicking it and changing file permissions. Finally, run StenoTutor either from command line (./StenoTutor) or by double-clicking it.
 
-2. Windows 64 bit - 
+2. Windows 64 bit -
 Double-click StenoTutor.bat (if the window is too little, exiting and then running it again should work)
 
-2. Windows 32 bit - 
+2. Windows 32 bit -
 Double-click StenoTutor.exe (if the window is too little, quitting and then running it again should work)
 
-3. Mac - 
+3. Mac -
 Follow readme.txt
 
 Features
@@ -55,6 +55,8 @@ Known Bugs
 ----------
 * Next chord highlighting currently shows only first chord for words that require multiple strokes.
 * There is no check for the completion of the lesson dictionary, so there are no greetings yet and there may be errors too.
+* Being paused a long time, the words-per-minute measure is inaccurate
+* When nearing the end of a set of words, the application crashes
 
 Planned Features and Future Enhancements
 ----------------------------------------
