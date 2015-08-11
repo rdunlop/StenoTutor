@@ -180,9 +180,9 @@ void setup() {
   logReader = utils.readEndOfFile(logFilePath);
 
   // Prepare file paths and read lesson dictionary and blacklist
-  lesDictionaryFilePath = sketchPath + "/data/lessons/" + lessonName + ".les";
-  chdDictionaryFilePath = sketchPath + "/data/lessons/" + lessonName + ".chd";
-  blkDictionaryFilePath = sketchPath + "/data/lessons/" + lessonName + ".blk";
+  lesDictionaryFilePath = sketchPath() + "/data/lessons/" + lessonName + ".les";
+  chdDictionaryFilePath = sketchPath() + "/data/lessons/" + lessonName + ".chd";
+  blkDictionaryFilePath = sketchPath() + "/data/lessons/" + lessonName + ".blk";
   dictionary = utils.readDictionary(lesDictionaryFilePath, chdDictionaryFilePath, debug);
   wordsBlacklist = utils.readBlacklist(blkDictionaryFilePath);
 
@@ -202,7 +202,7 @@ void setup() {
   keyboard = new Keyboard(keyboardX, keyboardY, showKeyboardQwerty);
 
   // Configure display size
-  size(frameSizeX, frameSizeY);
+  size(700, 480); //frameSizeX, frameSizeY);
 
   // Initialize and configure speech synthesis
   tts = new TTS();
@@ -332,7 +332,7 @@ void applyStartBlacklist() {
 void readSessionConfig() {
   Properties properties = new Properties();
   try {
-    properties.load(openStream(sketchPath + "/data/session.properties"));
+    properties.load(new FileInputStream(sketchPath() + "/data/session.properties"));
   } catch (Exception e ) {
     println("Cannot read session properties, using defalt values. Error: " + e.getMessage());
   }
