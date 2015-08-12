@@ -71,7 +71,7 @@ final PFont font = createFont("Arial",30,true);
 
 // Default relative path to Plover log for Win and other OSs
 final String winLogBasePath = "/AppData/Local/plover/plover/plover.log";
-final String xLogBasePath = "/.config/plover/plover.log";
+final String xLogBasePath = "/Library/Application Support/plover/plover.log";
 
 // Path to Plover log file
 String logFilePath;
@@ -190,6 +190,10 @@ int worstWordY = baseY + 200;
 int keyboardX = baseX - 10;
 int keyboardY = baseY + 230;
 
+public String sketchRootPath() {
+  return dataPath("");
+}
+
 // Session setup
 public void setup() {
   // Read session configuration
@@ -202,9 +206,9 @@ public void setup() {
   logReader = utils.readEndOfFile(logFilePath);
 
   // Prepare file paths and read lesson dictionary and blacklist
-  lesDictionaryFilePath = sketchPath + "/data/lessons/" + lessonName + ".les";
-  chdDictionaryFilePath = sketchPath + "/data/lessons/" + lessonName + ".chd";
-  blkDictionaryFilePath = sketchPath + "/data/lessons/" + lessonName + ".blk";
+  lesDictionaryFilePath = sketchRootPath() + "/lessons/" + lessonName + ".les";
+  chdDictionaryFilePath = sketchRootPath() + "/lessons/" + lessonName + ".chd";
+  blkDictionaryFilePath = sketchRootPath() + "/lessons/" + lessonName + ".blk";
   dictionary = utils.readDictionary(lesDictionaryFilePath, chdDictionaryFilePath, debug);
   wordsBlacklist = utils.readBlacklist(blkDictionaryFilePath);
 
@@ -224,7 +228,7 @@ public void setup() {
   keyboard = new Keyboard(keyboardX, keyboardY, showKeyboardQwerty);
 
   // Configure display size
-  size(frameSizeX, frameSizeY);
+  //frameSizeX, frameSizeY);
 
   // Initialize and configure speech synthesis
   tts = new TTS();
@@ -354,7 +358,7 @@ public void applyStartBlacklist() {
 public void readSessionConfig() {
   Properties properties = new Properties();
   try {
-    properties.load(openStream(sketchPath + "/data/session.properties"));
+    properties.load(new FileInputStream(sketchRootPath() + "/session.properties"));
   } catch (Exception e ) {
     println("Cannot read session properties, using defalt values. Error: " + e.getMessage());
   }
@@ -529,7 +533,7 @@ public void checkLevelUp() {
       return;
     }
   }
-  levelUp(); 
+  levelUp();
 }
 
 // Level up, unlock new words
@@ -1400,6 +1404,7 @@ public class WpmReporter extends Thread {
     }
   }
 }
+  public void settings() {  size(700, 480); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "StenoTutor" };
     if (passedArgs != null) {
